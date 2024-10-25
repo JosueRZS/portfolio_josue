@@ -9,7 +9,7 @@ const contactActions = [
   {
     title: "Descargar CV",
     icon: <FaDownload size={20} />,
-    path: "https://drive.google.com/file/d/1i524hjOd6LYruf3q2e6Fh1BQX4bqoVQN/view?usp=sharing", // Reemplaza esta ruta con la ruta correcta a tu CV
+    path: "https://drive.google.com/file/d/162Uxn73lsvsB6EwWgFvnyEXeaVtWD_SA/view?usp=sharing",
     color: "bg-white text-black",
     hoverColor: "hover:bg-blue-700 hover:text-white hover:font-semibold "
   },
