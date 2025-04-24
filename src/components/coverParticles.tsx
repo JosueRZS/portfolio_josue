@@ -1,5 +1,3 @@
-"use client"
-
 import { useEffect, useState } from "react";
 
 import { loadSlim } from "@tsparticles/slim";
@@ -26,7 +24,7 @@ export const CoverParticles = () => {
                     interactivity: {
                         events: {
                             onClick: {
-                                enable: true,
+                                enable: false,
                                 mode: "push",
                             },
                             onHover: {
@@ -69,7 +67,7 @@ export const CoverParticles = () => {
                             density: {
                                 enable: true,
                             },
-                            value: 80,
+                            value: 75,
                         },
                         opacity: {
                             value: 0.5,

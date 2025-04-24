@@ -7,22 +7,22 @@ const TECHNOLOGIES = [
   { name: "JavaScript", image: "/images/logos/javascript-original.svg" },
   { name: "React", image: "/images/logos/react-original.svg" },
   { name: "Next.js", image: "/images/logos/nextjs-original.svg" },
-  { name: "Dart", image: "/images/logos/dart-original.svg" },
+  //{ name: "Dart", image: "/images/logos/dart-original.svg" },
   { name: "Flutter", image: "/images/logos/flutter-original.svg" },
   { name: "MySQL", image: "/images/logos/mysql-original-wordmark.svg" },
   { name: "PostgreSQL", image: "/images/logos/postgresql-original.svg" },
-  { name: "Azure", image: "/images/logos/azure-original.svg" },
+  //{ name: "Azure", image: "/images/logos/azure-original.svg" },
   { name: "Git", image: "/images/logos/git-original.svg" },
   { name: "GitHub", image: "/images/logos/github-original.svg", customStyle: { filter: "invert(1)" } },
   { name: "WordPress", image: "/images/logos/wordpress-plain.svg" },
-  { name: "Elementor", image: "/images/logos/elementor.png" },
+  { name: "Elementor", image: "/images/logos/elementor.svg" },
 ];
 
 const Skills = () => {
   return (
-    <section id="skills" className="mt-10 py-10 " >
-      <h1 className="text-4xl font-bold mb-12 text-center text-white">Habilidades</h1>
-      <div className="grid grid-cols-3 md:grid-cols-7 gap-8">
+    <section id="skills" className="mt-10 py-10" >
+      <h1 className="text-4xl font-bold mb-12 text-center text-white pb-8 ">Habilidades</h1>
+      <div className="grid grid-cols-3 md:grid-cols-6 gap-8 pb-10 ">
         {TECHNOLOGIES.map((tech, index) => (
           <div
           key={tech.name}

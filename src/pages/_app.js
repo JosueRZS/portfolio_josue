@@ -14,8 +14,8 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <NextUIProvider>
       <Head>
-        <title>Josue_D3v</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>Josue-R3</title>
+        <link rel="icon" href="/images/logos/favicon.svg" type='image/svg+xml' />
       </Head>
       {getLayout(<Component {...pageProps} />)}
     </NextUIProvider>

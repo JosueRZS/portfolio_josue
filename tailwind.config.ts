@@ -11,12 +11,6 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors:{
-        //background: '#12131C',
-        //background: "#1C2120",
-        //background: '#212121',
-        background: '#0F1214',
-      }
     },
   },
   plugins: [nextui()],
