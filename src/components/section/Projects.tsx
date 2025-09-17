@@ -18,7 +18,6 @@ const CARD_DATA = [
     category: 'web',
     description: 'Single Landing Page para empresa relacionada con servicios tecnológicos.',
     tecnologies: [<FaWordpress key="Wordpress" />, <FaElementor key="Elementor" />],
-    visibility: 'private',
   },
   {
     title: 'PSI',
@@ -27,7 +26,6 @@ const CARD_DATA = [
     category: 'web',
     description: 'Dashboard administrativo con consumo de APIs, autenticación, roles, conexión con servicios en la nube de Azure y almacenamiento en gestor documental Sharepoint.',
     tecnologies: [<FaReact key="react" />, <RiNextjsFill key="nextjs" />, <RiTailwindCssFill key="tailwind" />, <SiMicrosoftazure key="azure" />, <SiMicrosoftsharepoint key="sharepoint" />],
-    visibility: 'private',
   },
   {
     title: 'App Móvil',
@@ -36,7 +34,6 @@ const CARD_DATA = [
     category: 'mobile',
     description: 'Aplicación móvil con consumo de APIs, autenticación y roles, gestión de estados con RiverPod, conexión con servicios en la nube.',
     tecnologies: [<DiDart key="dart" />, <RiFlutterFill key="flutter" />, <SiMicrosoftazure key="azure" />],
-    visibility: 'private',
   },
   {
     title: 'Distributivos APP',
@@ -45,7 +42,6 @@ const CARD_DATA = [
     category: 'desktop',
     description: 'Aplicación de escritorio en Microsoft Access para la gestión de distributivos académicos.',
     tecnologies: [<SiVisualbasic key="visualbasic" />, <SiMicrosoftaccess key="access" />, <SiMicrosoftexcel key="excel" />],
-    visibility: 'private',
   },
 ];
 
@@ -55,8 +51,6 @@ const FILTER_OPTIONS = [
   { value: 'web', label: 'Web' },
   { value: 'mobile', label: 'Móvil' },
   { value: 'desktop', label: 'Escritorio' },
-  { value: 'public', label: 'Público' },
-  { value: 'private', label: 'Privado' },
 ];
 
 export default function Projects() {
@@ -70,8 +64,6 @@ export default function Projects() {
   const filteredData =
     filter === 'all'
       ? CARD_DATA
-      : filter === 'public' || filter === 'private'
-      ? CARD_DATA.filter(card => card.visibility === filter)
       : CARD_DATA.filter(card => card.category === filter);
 
   return (

@@ -3,7 +3,8 @@ import { PiCertificateBold } from "react-icons/pi";
 
 // Datos de trayectoria
 const data = [
-  { title: "Técnico Junior en Desarrollo de Software", place: 'Instituto Superior Tecnológico España', status: "Actualmente...", category: 'experience' },
+  { title: "Desarrollador de Software", place: 'Gala Importaciones', status: "Actualmente...", category: 'experience' },
+  { title: "Técnico Junior en Desarrollo de Software", place: 'Instituto Superior Tecnológico España', status: "2023 - 2025", category: 'experience' },
   { title: "Técnico en Soporte Técnico Empresarial", place: 'PELByte', status: "2021 - 2023", category: 'experience' },
   { title: "Ingeniería en Ciberseguridad", place: 'Universidad de Saint Leo', status: "Cursando...", category: 'education' },
   { title: "Tecnólogo en Desarrollo Web", place: 'Instituto Superior Tecnológico España', status: "2021 - 2023", category: 'education' },
