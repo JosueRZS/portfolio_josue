@@ -3,7 +3,7 @@ import { PiCertificateBold } from "react-icons/pi";
 
 // Datos de trayectoria
 const data = [
-  { title: "Desarrollador de Software", place: 'Gala Importaciones', status: "Actualmente...", category: 'experience' },
+  { title: "Desarrollador de Software", place: 'Gala Corp', status: "Actualmente...", category: 'experience' },
   { title: "Técnico Junior en Desarrollo de Software", place: 'Instituto Superior Tecnológico España', status: "2023 - 2025", category: 'experience' },
   { title: "Técnico en Soporte Técnico Empresarial", place: 'PELByte', status: "2021 - 2023", category: 'experience' },
   { title: "Ingeniería en Ciberseguridad", place: 'Universidad de Saint Leo', status: "Cursando...", category: 'education' },
@@ -87,7 +87,7 @@ export default function Journy() {
   const certifications = data.filter(item => item.category === 'certification');
 
   return (
-    <section id='journy' className="max-w-full mx-auto py-16">
+    <section id='journy' className="max-w-full mx-auto mt-20">
       <h1 className="text-4xl font-bold mb-12 text-center text-white">Trayectoria</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-y-16 md:gap-x-8">
         <Timeline title="Experiencia" items={experience} />

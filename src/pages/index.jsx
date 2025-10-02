@@ -12,8 +12,8 @@ export default function Portfolio() {
       <main className='' >
         <About />
         <Skills />
-        <Journy />
         <Projects />
+        <Journy />
       </main>
     </>
   );

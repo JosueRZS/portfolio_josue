@@ -10,6 +10,7 @@ import { DiDart } from "react-icons/di";
 import { SiMicrosoftaccess, SiMicrosoftazure, SiMicrosoftsharepoint, SiVisualbasic, SiMicrosoftexcel } from "react-icons/si";
 
 // Datos de los proyectos
+// TODO: Pendiente agregar proyectos ISTE y Gala
 const CARD_DATA = [
   {
     title: 'PELByte',
@@ -25,7 +26,7 @@ const CARD_DATA = [
     github: '#',
     category: 'web',
     description: 'Dashboard administrativo con consumo de APIs, autenticación, roles, conexión con servicios en la nube de Azure y almacenamiento en gestor documental Sharepoint.',
-    tecnologies: [<FaReact key="react" />, <RiNextjsFill key="nextjs" />, <RiTailwindCssFill key="tailwind" />, <SiMicrosoftazure key="azure" />, <SiMicrosoftsharepoint key="sharepoint" />],
+    tecnologies: [<RiNextjsFill key="nextjs" />, <FaReact key="react" />, <RiTailwindCssFill key="tailwind" />, <SiMicrosoftazure key="azure" />, <SiMicrosoftsharepoint key="sharepoint" />],
   },
   {
     title: 'App Móvil',
@@ -67,7 +68,7 @@ export default function Projects() {
       : CARD_DATA.filter(card => card.category === filter);
 
   return (
-    <section className="text-white py-16">
+    <section className="text-white mt-20">
       <div id="projects" className="container mx-auto text-center py-10">
         {/* Título principal */}
         <h2 className="text-4xl font-bold mb-12">Proyectos</h2>
