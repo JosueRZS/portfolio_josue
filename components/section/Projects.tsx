@@ -17,6 +17,7 @@ import { VscAzure } from "react-icons/vsc";
 import { TbBrandOffice } from "react-icons/tb";
 
 // Datos de los proyectos
+// TODO: Pendiente agregar proyectos ISTE y Gala
 const CARD_DATA = [
   {
     title: "PELByte",
@@ -57,7 +58,7 @@ const CARD_DATA = [
       <RiFlutterFill key="flutter" />,
       <VscAzure key="azure" />,
     ],
-  }
+  },
 ];
 
 // Opciones de filtro para los botones
@@ -78,11 +79,10 @@ export default function Projects() {
       : CARD_DATA.filter((project) => project.category === selectedFilter);
 
   return (
-    <section id="projects" className="py-16">
-      <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center text-white mb-12">
-          Mis Proyectos
-        </h2>
+    <section className="text-white mt-20">
+      <div id="projects" className="container mx-auto text-center py-10">
+        {/* Título principal */}
+        <h2 className="text-4xl font-bold mb-12">Proyectos</h2>
 
         {/* Filtros */}
         <div className="flex justify-center mb-12 flex-wrap gap-4">

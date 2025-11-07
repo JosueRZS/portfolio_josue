@@ -49,97 +49,136 @@ const data = [
     place: "CertiProf",
     status: "2024",
     category: "certification",
-    link: "https://drive.google.com/file/d/14AMcHFvOPmhA1sAQZM9lLrOErks6r3gB/view?usp=drive_link",
+    link: "https://drive.google.com/file/d/14AMcHFvOPmhA1sAQZM9lLrOErks6r3gB/view?usp=sharing",
   },
+  {
+    title: "DevNet Associate",
+    place: "CISCO Networking Academy",
+    status: "2024",
+    category: "certification",
+    link: "https://drive.google.com/file/d/1dTlrOlBDlNYzaE6Lmi2AL-ISBqfuAsM6/view?usp=drive_link",
+  },
+  {
+    title: "Experto Técnico Internacional",
+    place: "SUDEN",
+    status: "2023",
+    category: "certification",
+    link: "https://drive.google.com/file/d/1EZDp-rK3ocG84JYFtc00C0iEfvNGCXO-/view?usp=drive_link",
+  },
+  {
+    title: "Administración Técnica",
+    place: "UDET",
+    status: "2023",
+    category: "certification",
+    link: "https://drive.google.com/file/d/1ABa7QcSv6h-FnFamRqJD5v5N9zBVdHae/view?usp=drive_link",
+  },
+  {
+    title: "Experto en configuración y gestión de redes",
+    place: "SUDEN",
+    status: "2023",
+    category: "certification",
+    link: "https://drive.google.com/file/d/1qA761yBe4TWzCj5lmjF8Emhxc_a0julA/view?usp=drive_link",
+  },
+  {
+    title: "Experto en ensamblaje de equipos de cómputo",
+    place: "SUDEN",
+    status: "2023",
+    category: "certification",
+    link: "https://drive.google.com/file/d/1JL7nOrkNA8RMyNiSzriC-xKQRltQV1ob/view?usp=drive_link",
+  },
+  {
+    title: "Experto en manteinimiento de equipos de cómputo",
+    place: "SUDEN",
+    status: "2023",
+    category: "certification",
+    link: "https://drive.google.com/file/d/10Las5lQ4Z2kUbbGEznQnJnOqrb6mC9sW/view?usp=drive_link",
+  }
 ];
 
-// Función para obtener el icono según la categoría
-const getCategoryIcon = (category: string) => {
-  switch (category) {
-    case "experience":
-      return <FaBriefcase className="text-cyan-400" />;
-    case "education":
-      return <FaGraduationCap className="text-blue-400" />;
-    case "certification":
-      return <PiCertificateBold className="text-green-400" />;
-    default:
-      return <FaCalendarAlt className="text-gray-400" />;
-  }
+// Componente Timeline reutilizable
+const Timeline = ({ title, items }: { title: string; items: typeof data }) => {
+  // Función para obtener el icono según la categoría
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case "experience":
+        return <FaBriefcase className="text-cyan-400" />;
+      case "education":
+        return <FaGraduationCap className="text-blue-400" />;
+      case "certification":
+        return <PiCertificateBold className="text-green-400" />;
+      default:
+        return <FaCalendarAlt className="text-gray-400" />;
+    }
+  };
+
+  return (
+    <div className="mb-8">
+      <h3 className="text-2xl font-bold text-white mb-6 text-center">
+        {title}
+      </h3>
+      <div className="relative space-y-6">
+        {/* Línea vertical */}
+        <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyan-400 to-blue-600"></div>
+
+        {items.map((item, index) => (
+          <div key={index} className="relative pl-12">
+            {/* Punto en la línea */}
+            <div className="absolute left-2.5 top-2 w-3 h-3 bg-cyan-400 rounded-full border-2 border-gray-900 shadow-lg">
+              <div className="absolute inset-0 bg-cyan-400 rounded-full animate-ping opacity-75"></div>
+            </div>
+
+            {/* Contenido */}
+            <div className="bg-gray-900/70 p-4 rounded-lg shadow-xl border border-gray-800 hover:border-cyan-400/50 transition-all duration-300">
+              <div className="flex items-center gap-2 mb-2">
+                {getCategoryIcon(item.category)}
+                <h4 className="text-lg font-semibold text-white">
+                  {item.title}
+                </h4>
+              </div>
+
+              <p className="text-gray-300 text-sm mb-1">{item.place}</p>
+
+              <div className="flex items-center gap-2 text-cyan-400 text-xs">
+                <FaCalendarAlt />
+                <span>{item.status}</span>
+              </div>
+
+              {item.link && (
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 mt-2 text-cyan-400 hover:text-cyan-300 transition-colors text-xs"
+                >
+                  <FaExternalLinkAlt />
+                  Ver certificado
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default function Journy() {
+  // Filtrar datos por categoría
+  const experience = data.filter((item) => item.category === "experience");
+  const education = data.filter((item) => item.category === "education");
+  const certifications = data.filter(
+    (item) => item.category === "certification"
+  );
+
   return (
-    <section id="journy" className="py-16">
-      <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center text-white mb-12">
-          Mi Trayectoria
-        </h2>
-
-        {/* Timeline */}
-        <div className="relative max-w-4xl mx-auto">
-          {/* Línea vertical central */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-cyan-400 to-blue-600"></div>
-
-          {data.map((item, index) => (
-            <div
-              key={index}
-              className={`flex items-center mb-8 ${
-                index % 2 === 0 ? "flex-row" : "flex-row-reverse"
-              }`}
-            >
-              {/* Contenido */}
-              <div
-                className={`w-5/12 ${
-                  index % 2 === 0 ? "pr-8 text-right" : "pl-8 text-left"
-                }`}
-              >
-                <div className="bg-gray-900/70 p-6 rounded-lg shadow-xl border border-gray-800 hover:border-cyan-400/50 transition-all duration-300">
-                  <div className="flex items-center gap-2 mb-2">
-                    {getCategoryIcon(item.category)}
-                    <span className="text-gray-400 text-sm uppercase tracking-wide">
-                      {item.category === "experience"
-                        ? "Experiencia"
-                        : item.category === "education"
-                        ? "Educación"
-                        : "Certificación"}
-                    </span>
-                  </div>
-
-                  <h3 className="text-lg font-semibold text-white mb-2">
-                    {item.title}
-                  </h3>
-
-                  <p className="text-gray-300 mb-2">{item.place}</p>
-
-                  <div className="flex items-center gap-2 text-cyan-400 text-sm">
-                    <FaCalendarAlt />
-                    <span>{item.status}</span>
-                  </div>
-
-                  {item.link && (
-                    <a
-                      href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 mt-3 text-cyan-400 hover:text-cyan-300 transition-colors text-sm"
-                    >
-                      <FaExternalLinkAlt />
-                      Ver certificado
-                    </a>
-                  )}
-                </div>
-              </div>
-
-              {/* Punto central */}
-              <div className="relative z-10 w-4 h-4 bg-cyan-400 rounded-full border-4 border-gray-900 shadow-lg">
-                <div className="absolute inset-0 bg-cyan-400 rounded-full animate-ping opacity-75"></div>
-              </div>
-
-              {/* Espacio vacío del otro lado */}
-              <div className="w-5/12"></div>
-            </div>
-          ))}
-        </div>
+    <section id="journy" className="max-w-full mx-auto mt-20">
+      <h1 className="text-4xl font-bold mb-12 text-center text-white">
+        Trayectoria
+      </h1>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-y-16 md:gap-x-8">
+        <Timeline title="Experiencia" items={experience} />
+        <Timeline title="Educación" items={education} />
+        <Timeline title="Certificaciones" items={certifications} />
       </div>
     </section>
   );
