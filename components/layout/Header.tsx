@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 
@@ -79,7 +81,11 @@ export default function Header() {
         }`}
         aria-label="Abrir menú de navegación"
       >
-        {headerOpen ? <FaTimes className="h-5 w-5" /> : <FaBars className="h-5 w-5" />}
+        {headerOpen ? (
+          <FaTimes className="h-5 w-5" />
+        ) : (
+          <FaBars className="h-5 w-5" />
+        )}
       </button>
 
       {/* ---------- PANEL MOBILE ---------- */}
