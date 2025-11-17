@@ -33,14 +33,14 @@ export default function RootLayout({
       <head>
         <link
           rel="icon"
-          href="/images/logos/favicon.svg"
+          href="/icons/favicon.svg"
           type="image/svg+xml"
         />
       </head>
-      <body className="min-h-screen bg-[#0F1214] text-white antialiased">
+      <body className="min-h-screen bg-black-deep text-white antialiased">
         <div className="flex min-h-screen flex-col">
           <Header />
-          <main className="container mt-20 mx-auto py-4 px-6 md:px-8 flex-1">
+          <main className="container mx-auto mt-40 py-4 px-6 md:px-0">
             {children}
           </main>
           <Footer />

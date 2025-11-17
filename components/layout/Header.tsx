@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 // Rutas de navegación
@@ -22,7 +22,7 @@ export default function Header() {
 
   const toggleHeader = () => setHeaderOpen((prev) => !prev);
 
-  /* ---- Enlaces genéricos ---- */
+  /* ---- Enlaces normales ---- */
   const renderNavLinks = (mobile = false) => (
     <ul
       className={
@@ -59,7 +59,7 @@ export default function Header() {
   );
 
   return (
-    <header className="fixed top-0 z-50 w-full flex justify-center items-start mt-2">
+    <header className="fixed top-5 z-50 w-full flex justify-center items-start mt-2">
       {/* ---------- DESKTOP (pill centrado) ---------- */}
       <nav
         className={`hidden md:block transition-all duration-300 px-4 py-3 rounded-full ${
@@ -74,7 +74,7 @@ export default function Header() {
       {/* ---------- BOTÓN MOBILE (queda fuera del pill) ---------- */}
       <button
         onClick={toggleHeader}
-        className={`md:hidden absolute left-4 top-3 transition-all duration-300 ${
+        className={`md:hidden absolute right-4 top-3 transition-all duration-300 ${
           scrolled
             ? "bg-gray-900 p-2.5 shadow-lg rounded-full text-white"
             : "p-2 text-white"

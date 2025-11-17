@@ -2,18 +2,18 @@ import React from "react";
 import Image from "next/image";
 
 const TECHNOLOGIES = [
-  { name: "HTML 5", image: "/images/logos/html5-original.svg" },
-  { name: "CSS 3", image: "/images/logos/css3-original.svg" },
-  { name: "JavaScript", image: "/images/logos/javascript-original.svg" },
-  { name: "React", image: "/images/logos/react-original.svg" },
-  { name: "Next.js", image: "/images/logos/nextjs-original.svg" },
-  { name: "Flutter", image: "/images/logos/flutter-original.svg" },
-  { name: "MySQL", image: "/images/logos/mysql-original-wordmark.svg" },
-  { name: "PostgreSQL", image: "/images/logos/postgresql-original.svg" },
-  { name: "Git", image: "/images/logos/git-original.svg" },
-  { name: "GitHub", image: "/images/logos/github-original.svg", customStyle: { filter: "invert(1)" },},
-  { name: "WordPress", image: "/images/logos/wordpress-plain.svg" },
-  { name: "Elementor", image: "/images/logos/elementor.svg" },
+  { name: "HTML 5", image: "/icons/html5-original.svg" },
+  { name: "CSS 3", image: "/icons/css3-original.svg" },
+  { name: "JavaScript", image: "/icons/javascript-original.svg" },
+  { name: "React", image: "/icons/react-original.svg" },
+  { name: "Next.js", image: "/icons/nextjs-original.svg" },
+  { name: "Flutter", image: "/icons/flutter-original.svg" },
+  { name: "MySQL", image: "/icons/mysql-original-wordmark.svg" },
+  { name: "PostgreSQL", image: "/icons/postgresql-original.svg" },
+  { name: "Git", image: "/icons/git-original.svg" },
+  { name: "GitHub", image: "/icons/github-original.svg", customStyle: { filter: "invert(1)" },},
+  { name: "WordPress", image: "/icons/wordpress-plain.svg" },
+  { name: "Elementor", image: "/icons/elementor.svg" },
 ];
 
 export default function Skills() {
