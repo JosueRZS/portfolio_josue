@@ -11,8 +11,8 @@ export default function HomePage() {
       <div className="space-y-16">
         <About />
         <Skills />
-        <Projects />
         <Journy />
+        <Projects />
       </div>
     </>
   );
