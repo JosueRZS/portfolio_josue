@@ -1,48 +1,148 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { LuMonitorDot, LuServer, LuGitBranch } from "react-icons/lu";
+import { GoDatabase } from "react-icons/go";
+import { HiOutlineDevicePhoneMobile } from "react-icons/hi2";
+import { CiCloud } from "react-icons/ci";
 
-const TECHNOLOGIES = [
-  { name: "HTML 5", image: "/icons/html5-original.svg" },
-  { name: "CSS 3", image: "/icons/css3-original.svg" },
-  { name: "JavaScript", image: "/icons/javascript-original.svg" },
-  { name: "React", image: "/icons/react-original.svg" },
-  { name: "Next.js", image: "/icons/nextjs-original.svg" },
-  { name: "Flutter", image: "/icons/flutter-original.svg" },
-  { name: "MySQL", image: "/icons/mysql-original-wordmark.svg" },
-  { name: "PostgreSQL", image: "/icons/postgresql-original.svg" },
-  { name: "Git", image: "/icons/git-original.svg" },
-  { name: "GitHub", image: "/icons/github-original.svg", customStyle: { filter: "invert(1)" },},
-  { name: "WordPress", image: "/icons/wordpress-plain.svg" },
-  { name: "Elementor", image: "/icons/elementor.svg" },
+const skillsByCategory = [
+  {
+    category: "Frontend",
+    icon: <LuMonitorDot />,
+    skills: [
+      { name: "HTML 5", image: "/icons/html5.svg" },
+      { name: "CSS 3", image: "/icons/css3.svg" },
+      { name: "JavaScript", image: "/icons/javascript.svg" },
+      { name: "React", image: "/icons/react.svg" },
+      { name: "Next.js", image: "/icons/nextjs.svg" },
+    ],
+  },
+  {
+    category: "Backend",
+    icon: <LuServer />,
+    skills: [
+      { name: "Node.js", image: "/icons/nodejs.svg" },
+      { name: "NestJS", image: "/icons/nestjs.svg" },
+      { name: "PHP", image: "/icons/php.svg" },
+      { name: "Python", image: "/icons/python.svg" },
+      { name: "C#", image: "/icons/csharp.svg" },
+    ],
+  },
+  {
+    category: "Bases de Datos",
+    icon: <GoDatabase />,
+    skills: [
+      { name: "MySQL", image: "/icons/mysql.svg" },
+      { name: "PostgreSQL", image: "/icons/postgresql.svg" },
+      { name: "Supabase", image: "/icons/supabase.svg" },
+    ],
+  },
+  {
+    category: "Mobile",
+    icon: <HiOutlineDevicePhoneMobile />,
+    skills: [
+      { name: "Flutter", image: "/icons/flutter.svg" },
+      { name: "Dart", image: "/icons/dart.svg" },
+    ],
+  },
+  {
+    category: "Control de Versiones",
+    icon: <LuGitBranch />,
+    skills: [
+      { name: "Git", image: "/icons/git.svg" },
+      { name: "GitHub", image: "/icons/github.svg" },
+    ],
+  },
+  {
+    category: "CMS & Cloud",
+    icon: <CiCloud />,
+    skills: [
+      { name: "WordPress", image: "/icons/wordpress.svg" },
+      { name: "Elementor", image: "/icons/elementor.svg" },
+      { name: "Vercel", image: "/icons/vercel.svg" },
+      { name: "Azure", image: "/icons/azure.svg" },
+    ],
+  },
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="mt-10 py-10">
-      <h1 className="text-4xl font-bold mb-12 text-center text-white pb-8">
-        Habilidades
-      </h1>
-      <div className="grid grid-cols-3 md:grid-cols-6 gap-8 pb-10">
-        {TECHNOLOGIES.map((tech) => (
-          <div
-            key={tech.name}
-            className="group flex justify-center items-center relative"
-          >
-            {/* Imagen con efecto de hover */}
-            <Image
-              src={tech.image}
-              alt={tech.name}
-              width={75}
-              height={75}
-              className="w-18 h-18 transform transition-transform duration-300 group-hover:scale-150"
-              style={tech.customStyle ? tech.customStyle : {}}
-            />
-            {/* Tooltip personalizado con Tailwind */}
-            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-white text-black text-center text-xs rounded-lg px-2 py-1 transition-opacity duration-300 whitespace-nowrap">
-              {tech.name}
-            </div>
-          </div>
-        ))}
+    <section id="skills" className="py-10">
+      <div>
+        {/* Header */}
+        <h2 className="text-5xl font-bold text-white mb-14 text-center">
+          Mis{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-border to-strong">
+            Habilidades
+          </span>
+        </h2>
+
+        {/* Skills Grid */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {skillsByCategory.map((category, i) => {
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.1, duration: 0.5 }}
+                className="bg-slate-dark/50 backdrop-blur-sm border border-border/20 rounded-2xl p-6 transition-all duration-300"
+              >
+                <div className="space-y-8">
+                  {/* Category header */}
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-border/20 to-strong/20 flex items-center justify-center text-4xl">
+                      {category.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-white font-bold text-xl">
+                        {category.category}
+                      </h3>
+                      <p className="text-gray-400 text-sm">
+                        {category.skills.length} tecnologías
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Skills icons grid with tooltips */}
+                  <div className="flex flex-wrap gap-2">
+                    {category.skills.map((skill, j) => (
+                      <motion.div
+                        key={j}
+                        whileHover={{ scale: 1.1, y: -4 }}
+                        className="group relative"
+                      >
+                        <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-border/10 to-strong/10 border border-border/20 flex items-center justify-center cursor-pointer group-hover:from-border/30 group-hover:to-strong/30 group-hover:border-border transition-all duration-300 group-hover:shadow-lg group-hover:shadow-border/20">
+                          <Image
+                            src={skill.image}
+                            alt={skill.name}
+                            width={28} // antes 32
+                            height={28}
+                            className="w-8 h-8 transition-transform duration-300 group-hover:scale-110"
+                          />
+                        </div>
+
+                        {/* Tooltip */}
+                        <div className="absolute -top-12 left-1/2 -translate-x-1/2 px-3 py-2 bg-slate-dark text-tooltip-text text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap font-semibold pointer-events-none shadow-xl z-10">
+                          {skill.name}
+                          <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-border/50 rotate-45" />
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
       </div>
     </section>
   );
