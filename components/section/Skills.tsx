@@ -8,6 +8,7 @@ import { GoDatabase } from "react-icons/go";
 import { HiOutlineDevicePhoneMobile } from "react-icons/hi2";
 import { CiCloud } from "react-icons/ci";
 
+// Datos de habilidades organizados por categoría
 const skillsByCategory = [
   {
     category: "Frontend",
@@ -24,11 +25,11 @@ const skillsByCategory = [
     category: "Backend",
     icon: <LuServer />,
     skills: [
-      { name: "Node.js", image: "/icons/nodejs.svg" },
-      { name: "NestJS", image: "/icons/nestjs.svg" },
       { name: "PHP", image: "/icons/php.svg" },
       { name: "Python", image: "/icons/python.svg" },
       { name: "C#", image: "/icons/csharp.svg" },
+      { name: "Node.js", image: "/icons/nodejs.svg" },
+      { name: "NestJS", image: "/icons/nestjs.svg" },
     ],
   },
   {
@@ -72,7 +73,7 @@ export default function Skills() {
   return (
     <section id="skills" className="py-10">
       <div>
-        {/* Header */}
+        {/* Encabezado de la sección */}
         <h2 className="text-5xl font-bold text-white mb-14 text-center">
           Mis{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-border to-strong">
@@ -80,7 +81,7 @@ export default function Skills() {
           </span>
         </h2>
 
-        {/* Skills Grid */}
+        {/* Grilla de habilidades */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -97,7 +98,7 @@ export default function Skills() {
                 className="bg-slate-dark/50 backdrop-blur-sm border border-border/20 rounded-2xl p-6 transition-all duration-300"
               >
                 <div className="space-y-8">
-                  {/* Category header */}
+                  {/* Encabezado de categoría */}
                   <div className="flex items-center gap-4">
                     <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-border/20 to-strong/20 flex items-center justify-center text-4xl">
                       {category.icon}

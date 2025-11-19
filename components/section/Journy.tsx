@@ -1,159 +1,178 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  FaBriefcase,
-  FaGraduationCap,
-  FaCalendarAlt,
-  FaExternalLinkAlt,
-  FaChevronLeft,
-  FaChevronRight,
-} from "react-icons/fa";
+import { useVisibilityObserver } from "@/hooks/useVisibilityObserver";
+import { useMobile } from "@/hooks/useMobile";
+import { FaBriefcase, FaGraduationCap, FaChevronLeft, FaChevronRight, FaCalendarAlt } from "react-icons/fa";
 import { PiCertificateBold } from "react-icons/pi";
+import clsx from "clsx";
 
-// Datos categorizados (ordenados del más reciente al más antiguo)
-export const journeyByCategory = {
-  experience: [
-    {
-      title: "Desarrollador de Software",
-      place: "Gala Corp",
-      status: "Actualmente...",
-    },
-    {
-      title: "Técnico Junior en Desarrollo de Software",
-      place: "Instituto Superior Tecnológico España",
-      status: "2023 - 2025",
-    },
-    {
-      title: "Técnico en Soporte Técnico Empresarial",
-      place: "PELByte",
-      status: "2021 - 2023",
-    },
-  ],
-  education: [
-    {
-      title: "Ingeniería en Ciberseguridad",
-      place: "Universidad de Saint Leo",
-      status: "Cursando...",
-    },
-    {
-      title: "Tecnólogo en Desarrollo Web",
-      place: "Instituto Superior Tecnológico España",
-      status: "2021 - 2023",
-    },
-    {
-      title: "Bachiller en Ciencias",
-      place: "Unidad Educativa Ambato",
-      status: "2013 - 2020",
-    },
-  ],
-  certification: [
-    {
-      title: "LCSPC",
-      place: "CertiProf",
-      status: "2024",
-      link: "https://drive.google.com/file/d/14AMcHFvOPmhA1sAQZM9lLrOErks6r3gB/view?usp=sharing",
-    },
-    {
-      title: "DevNet Associate",
-      place: "CISCO Networking Academy",
-      status: "2024",
-      link: "https://drive.google.com/file/d/1dTlrOlBDlNYzaE6Lmi2AL-ISBqfuAsM6/view?usp=drive_link",
-    },
-    {
-      title: "Experto Técnico Internacional",
-      place: "SUDEN",
-      status: "2023",
-      link: "https://drive.google.com/file/d/1EZDp-rK3ocG84JYFtc00C0iEfvNGCXO-/view?usp=drive_link",
-    },
-    {
-      title: "Administración Técnica",
-      place: "UDET",
-      status: "2023",
-      link: "https://drive.google.com/file/d/1ABa7QcSv6h-FnFamRqJD5v5N9zBVdHae/view?usp=drive_link",
-    },
-    {
-      title: "Experto en configuración y gestión de redes",
-      place: "SUDEN",
-      status: "2023",
-      link: "https://drive.google.com/file/d/1qA761yBe4TWzCj5lmjF8Emhxc_a0julA/view?usp=drive_link",
-    },
-    {
-      title: "Experto en ensamblaje de equipos de cómputo",
-      place: "SUDEN",
-      status: "2023",
-      link: "https://drive.google.com/file/d/1JL7nOrkNA8RMyNiSzriC-xKQRltQV1ob/view?usp=drive_link",
-    },
-    {
-      title: "Experto en mantenimiento de equipos de cómputo",
-      place: "SUDEN",
-      status: "2023",
-      link: "https://drive.google.com/file/d/10Las5lQ4Z2kUbbGEznQnJnOqrb6mC9sW/view?usp=drive_link",
-    },
-  ],
-};
-
-// Esquema de colores por categoría
-const colorThemes = {
-  experience: {
-    primary: "#06b6d4",
-    secondary: "#0ea5e9",
+// Datos categorizados
+const journeyByCategory = [
+  {
+    key: "experience",
+    category: "Experiencia",
+    icon: <FaBriefcase />,
+    items: [
+      {
+        title: "Desarrollador de Software",
+        place: "Gala Corp",
+        status: "Actualmente...",
+      },
+      {
+        title: "Técnico Junior en Desarrollo de Software",
+        place: "Instituto Superior Tecnológico España",
+        status: "2023 - 2025",
+      },
+      {
+        title: "Técnico en Soporte Técnico Empresarial",
+        place: "PELByte",
+        status: "2021 - 2023",
+      },
+    ],
   },
-  education: {
-    primary: "#60a5fa",
-    secondary: "#3b82f6",
+  {
+    key: "education",
+    category: "Educación",
+    icon: <FaGraduationCap />,
+    items: [
+      {
+        title: "Ingeniería en Ciberseguridad",
+        place: "Universidad de Saint Leo",
+        status: "Cursando...",
+      },
+      {
+        title: "Tecnólogo en Desarrollo Web",
+        place: "Instituto Superior Tecnológico España",
+        status: "2021 - 2023",
+      },
+      {
+        title: "Bachiller en Ciencias",
+        place: "Unidad Educativa Ambato",
+        status: "2013 - 2020",
+      },
+    ],
   },
-  certification: {
-    primary: "#a78bfa",
-    secondary: "#8b5cf6",
+  {
+    key: "certification",
+    category: "Certificaciones",
+    icon: <PiCertificateBold />,
+    items: [
+      {
+        title: "LCSPC",
+        place: "CertiProf",
+        status: "2024",
+        link: "https://drive.google.com/file/d/14AMcHFvOPmhA1sAQZM9lLrOErks6r3gB/view?usp=sharing",
+      },
+      {
+        title: "DevNet Associate",
+        place: "CISCO Networking Academy",
+        status: "2024",
+        link: "https://drive.google.com/file/d/1dTlrOlBDlNYzaE6Lmi2AL-ISBqfuAsM6/view?usp=drive_link",
+      },
+      {
+        title: "Administración Técnica",
+        place: "UDET",
+        status: "2023",
+        link: "https://drive.google.com/file/d/1ABa7QcSv6h-FnFamRqJD5v5N9zBVdHae/view?usp=drive_link",
+      },
+      {
+        title: "Experto Técnico Internacional",
+        place: "SUDEN",
+        status: "2023",
+        link: "https://drive.google.com/file/d/1EZDp-rK3ocG84JYFtc00C0iEfvNGCXO-/view?usp=drive_link",
+      },
+      {
+        title: "Experto en configuración y gestión de redes",
+        place: "SUDEN",
+        status: "2022 - 2023",
+        link: "https://drive.google.com/file/d/1qA761yBe4TWzCj5lmjF8Emhxc_a0julA/view?usp=drive_link",
+      },
+      {
+        title: "Experto en ensamblaje de equipos de cómputo",
+        place: "SUDEN",
+        status: "2022 - 2023",
+        link: "https://drive.google.com/file/d/1JL7nOrkNA8RMyNiSzriC-xKQRltQV1ob/view?usp=drive_link",
+      },
+    ],
   },
-};
-
-type TabType = "experience" | "education" | "certification";
+];
 
 export default function Journy() {
-  const [activeTab, setActiveTab] = useState<TabType>("experience");
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [activeTab, setActiveTab] = useState<string>("experience");
+  const [showArrows, setShowArrows] = useState(false);
+  const [tooltip, setTooltip] = useState<{
+    x: number;
+    y: number;
+    visible: boolean;
+  } | null>(null);
 
-  const getCurrentData = () => {
-    return journeyByCategory[activeTab];
-  };
+  useEffect(() => {
+    setTooltip(null);
+  }, [activeTab]);
 
-  const getCategoryColor = (type: "primary" | "secondary" = "primary") => {
-    return colorThemes[activeTab][type];
-  };
+  const scrollContainerRefs = useRef<{ [key: string]: HTMLDivElement | null }>(
+    {}
+  );
 
-  const getCurrentIcon = () => {
-    switch (activeTab) {
-      case "experience":
-        return (
-          <FaBriefcase
-            className="w-6 h-6"
-            style={{ color: getCategoryColor() }}
-          />
-        );
-      case "education":
-        return (
-          <FaGraduationCap
-            className="w-6 h-6"
-            style={{ color: getCategoryColor() }}
-          />
-        );
-      case "certification":
-        return (
-          <PiCertificateBold
-            className="w-6 h-6"
-            style={{ color: getCategoryColor() }}
-          />
-        );
-    }
-  };
+  // Obtener la categoría activa
+  const activeCategoryData = journeyByCategory.find(
+    (cat) => cat.key === activeTab
+  );
 
-  const scroll = (direction: "left" | "right") => {
-    if (scrollContainerRef.current) {
-      const scrollAmount = 400;
-      scrollContainerRef.current.scrollBy({
+  // Agrupar items por status preservando el orden (asumiendo que vienen ordenados por fecha descendente)
+  const groups: { status: string; items: any[] }[] = [];
+  if (activeCategoryData) {
+    activeCategoryData.items.forEach((item: any) => {
+      const lastGroup = groups[groups.length - 1];
+      if (lastGroup && lastGroup.status === item.status) {
+        lastGroup.items.push(item);
+      } else {
+        groups.push({ status: item.status, items: [item] });
+      }
+    });
+  }
+
+  // Hook de visibilidad
+  const { isMobile, isTablet } = useMobile();
+  const deviceType = isMobile ? "Móvil" : isTablet ? "Tablet" : "Escritorio";
+  useVisibilityObserver(
+    '[data-observe="true"]',
+    [activeTab, groups, deviceType],
+    deviceType
+  );
+
+  // Control de flechas
+  useEffect(() => {
+    const checkArrows = () => {
+      const container = scrollContainerRefs.current[activeTab];
+      if (container) {
+        setShowArrows(container.scrollWidth > container.clientWidth + 1);
+      }
+    };
+
+    checkArrows();
+    const timer = setTimeout(checkArrows, 100);
+    window.addEventListener("resize", checkArrows);
+    return () => {
+      window.removeEventListener("resize", checkArrows);
+      clearTimeout(timer);
+    };
+  }, [activeTab, groups]);
+
+  const slide = (direction: "left" | "right", key: string) => {
+    const container = scrollContainerRefs.current[key];
+    if (container) {
+      const firstItem = container.firstElementChild as HTMLElement;
+      // gap-10 es 2.5rem = 40px
+      const gap = 40;
+      const itemWidth = firstItem
+        ? firstItem.offsetWidth
+        : container.clientWidth;
+      const scrollAmount = itemWidth + gap;
+
+      container.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
       });
@@ -161,8 +180,8 @@ export default function Journy() {
   };
 
   return (
-    <section id="journy" className="py-10 relative">
-      <div>
+    <section id="journy" className="py-20 relative">
+      <div className="relative z-10 px-4">
         {/* Header */}
         <h2 className="text-5xl font-bold text-white mb-14 text-center">
           Mi{" "}
@@ -172,415 +191,181 @@ export default function Journy() {
         </h2>
 
         {/* Tabs */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          <button
-            onClick={() => setActiveTab("experience")}
-            className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
-              activeTab === "experience"
-                ? "text-white shadow-lg"
-                : "bg-slate-dark/50 border border-border/20 text-gray-300 hover:border-border/50"
-            }`}
-            style={
-              activeTab === "experience"
-                ? {
-                    background: `linear-gradient(to right, ${colorThemes.experience.primary}, ${colorThemes.experience.secondary})`,
-                    boxShadow: `0 10px 30px ${colorThemes.experience.primary}30`,
-                  }
-                : undefined
-            }
-          >
-            Experiencia
-          </button>
-          <button
-            onClick={() => setActiveTab("education")}
-            className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
-              activeTab === "education"
-                ? "text-white shadow-lg"
-                : "bg-slate-dark/50 border border-border/20 text-gray-300 hover:border-border/50"
-            }`}
-            style={
-              activeTab === "education"
-                ? {
-                    background: `linear-gradient(to right, ${colorThemes.education.primary}, ${colorThemes.education.secondary})`,
-                    boxShadow: `0 10px 30px ${colorThemes.education.primary}30`,
-                  }
-                : undefined
-            }
-          >
-            Educación
-          </button>
-          <button
-            onClick={() => setActiveTab("certification")}
-            className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
-              activeTab === "certification"
-                ? "text-white shadow-lg"
-                : "bg-slate-dark/50 border border-border/20 text-gray-300 hover:border-border/50"
-            }`}
-            style={
-              activeTab === "certification"
-                ? {
-                    background: `linear-gradient(to right, ${colorThemes.certification.primary}, ${colorThemes.certification.secondary})`,
-                    boxShadow: `0 10px 30px ${colorThemes.certification.primary}30`,
-                  }
-                : undefined
-            }
-          >
-            Certificaciones
-          </button>
+        <div className="flex flex-col md:flex-row flex-wrap justify-center gap-4 mb-16">
+          {journeyByCategory.map((category) => (
+            <button
+              key={category.key}
+              onClick={() => setActiveTab(category.key)}
+              className={clsx(
+                "px-6 py-3 rounded-xl font-medium transition-all duration-300",
+                activeTab === category.key
+                  ? "text-white shadow-lg bg-gradient-to-br from-border/20 to-strong/20 shadow-border/30"
+                  : "bg-slate-dark/50 border border-border/20 text-gray-300 hover:border-border/50 hover:bg-slate-dark/70"
+              )}
+            >
+              {category.category}
+            </button>
+          ))}
         </div>
 
         {/* Timeline Container */}
-        <AnimatePresence mode="wait">
-          {/* Experience Content */}
-          {activeTab === "experience" && (
-            <motion.div
-              key="experience"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="relative"
-            >
-              {/* Timeline Line */}
-              <div
-                className="absolute top-[32px] left-0 right-0 h-0.5 hidden md:block"
-                style={{
-                  background: `linear-gradient(to right, transparent, ${colorThemes.experience.primary}, transparent)`,
-                }}
-              />
+        <div className="relative">
+          {/* Linea central decorativa */}
+          <div
+            // NO TOCAR: Configuración crítica para el diseño
+            className="absolute left-0 right-0 h-0.5 hidden lg:block bg-gradient-to-r from-transparent via-strong to-transparent top-11" // top-11 para que quede alineada con los iconos
+          />
 
-              {/* Timeline - Start from left (3 items) */}
-              <div className="pb-4">
-                <div className="flex flex-wrap gap-6 items-start justify-start">
-                  {journeyByCategory.experience.map((item, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1, duration: 0.5 }}
-                      className="relative w-full md:w-auto"
-                    >
-                      {/* Icon Circle - No scale effect */}
-                      <div className="flex justify-center mb-6 relative z-10">
-                        <div
-                          className="w-16 h-16 rounded-xl flex items-center justify-center text-3xl transition-all duration-300"
-                          style={{
-                            backgroundColor: "#020617",
-                            border: `2px solid ${colorThemes.experience.primary}`,
-                            color: colorThemes.experience.primary,
-                            boxShadow: `0 0 0 6px #020617`,
-                          }}
-                        >
-                          <FaBriefcase className="w-6 h-6" />
-                        </div>
-                      </div>
-
-                      {/* Card - Scale effect on first item (most recent) */}
-                      <div
-                        className={`bg-slate-dark/50 backdrop-blur-sm border rounded-2xl p-6 transition-all duration-300 hover:scale-105 h-48 flex flex-col justify-between ${
-                          index === 0 ? "scale-105" : ""
-                        }`}
-                        style={{
-                          borderColor:
-                            index === 0
-                              ? colorThemes.experience.primary
-                              : `${colorThemes.experience.primary}30`,
-                          boxShadow:
-                            index === 0
-                              ? `0 10px 40px ${colorThemes.experience.primary}40, 0 0 0 1px ${colorThemes.experience.primary}50`
-                              : "none",
-                          minWidth: "280px",
-                          maxWidth: "400px",
-                        }}
-                        onMouseEnter={(e) => {
-                          if (index !== 0) {
-                            e.currentTarget.style.borderColor = `${colorThemes.experience.primary}60`;
-                            e.currentTarget.style.boxShadow = `0 10px 30px ${colorThemes.experience.primary}20`;
-                          }
-                        }}
-                        onMouseLeave={(e) => {
-                          if (index !== 0) {
-                            e.currentTarget.style.borderColor = `${colorThemes.experience.primary}30`;
-                            e.currentTarget.style.boxShadow = "none";
-                          }
-                        }}
-                      >
-                        <div>
-                          <h4 className="text-white font-bold text-lg mb-2 line-clamp-2">
-                            {item.title}
-                          </h4>
-                          <p className="text-gray-300 text-sm line-clamp-2">
-                            {item.place}
-                          </p>
-                        </div>
-                        <div className="flex items-center justify-between mt-4">
-                          <div
-                            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border backdrop-blur-sm text-xs font-medium"
-                            style={{
-                              borderColor: colorThemes.experience.primary,
-                              backgroundColor: `${colorThemes.experience.primary}15`,
-                              color: colorThemes.experience.primary,
-                            }}
-                          >
-                            <FaCalendarAlt className="w-3 h-3" />
-                            <span>{item.status}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          )}
-
-          {/* Education Content */}
-          {activeTab === "education" && (
-            <motion.div
-              key="education"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="relative"
-            >
-              {/* Timeline Line */}
-              <div
-                className="absolute top-[32px] left-0 right-0 h-0.5 hidden md:block"
-                style={{
-                  background: `linear-gradient(to right, transparent, ${colorThemes.education.primary}, transparent)`,
-                }}
-              />
-
-              {/* Timeline - Start from left (3 items) */}
-              <div className="pb-4">
-                <div className="flex flex-wrap gap-6 items-start justify-start">
-                  {journeyByCategory.education.map((item, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1, duration: 0.5 }}
-                      className="relative w-full md:w-auto"
-                    >
-                      {/* Icon Circle - No scale effect */}
-                      <div className="flex justify-center mb-6 relative z-10">
-                        <div
-                          className="w-16 h-16 rounded-xl flex items-center justify-center text-3xl transition-all duration-300"
-                          style={{
-                            backgroundColor: "#020617",
-                            border: `2px solid ${colorThemes.education.primary}`,
-                            color: colorThemes.education.primary,
-                            boxShadow: `0 0 0 6px #020617`,
-                          }}
-                        >
-                          <FaGraduationCap className="w-6 h-6" />
-                        </div>
-                      </div>
-
-                      {/* Card - Scale effect on first item (most recent) */}
-                      <div
-                        className={`bg-slate-dark/50 backdrop-blur-sm border rounded-2xl p-6 transition-all duration-300 hover:scale-105 h-48 flex flex-col justify-between ${
-                          index === 0 ? "scale-105" : ""
-                        }`}
-                        style={{
-                          borderColor:
-                            index === 0
-                              ? colorThemes.education.primary
-                              : `${colorThemes.education.primary}30`,
-                          boxShadow:
-                            index === 0
-                              ? `0 10px 40px ${colorThemes.education.primary}40, 0 0 0 1px ${colorThemes.education.primary}50`
-                              : "none",
-                          minWidth: "280px",
-                          maxWidth: "400px",
-                        }}
-                        onMouseEnter={(e) => {
-                          if (index !== 0) {
-                            e.currentTarget.style.borderColor = `${colorThemes.education.primary}60`;
-                            e.currentTarget.style.boxShadow = `0 10px 30px ${colorThemes.education.primary}20`;
-                          }
-                        }}
-                        onMouseLeave={(e) => {
-                          if (index !== 0) {
-                            e.currentTarget.style.borderColor = `${colorThemes.education.primary}30`;
-                            e.currentTarget.style.boxShadow = "none";
-                          }
-                        }}
-                      >
-                        <div>
-                          <h4 className="text-white font-bold text-lg mb-2 line-clamp-2">
-                            {item.title}
-                          </h4>
-                          <p className="text-gray-300 text-sm line-clamp-2">
-                            {item.place}
-                          </p>
-                        </div>
-                        <div className="flex items-center justify-between mt-4">
-                          <div
-                            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border backdrop-blur-sm text-xs font-medium"
-                            style={{
-                              borderColor: colorThemes.education.primary,
-                              backgroundColor: `${colorThemes.education.primary}15`,
-                              color: colorThemes.education.primary,
-                            }}
-                          >
-                            <FaCalendarAlt className="w-3 h-3" />
-                            <span>{item.status}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          )}
-
-          {/* Certification Content - Carousel with 7 cards */}
-          {activeTab === "certification" && (
-            <motion.div
-              key="certification"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="relative"
-            >
-              {/* Timeline Line */}
-              <div
-                className="absolute top-[32px] left-0 right-0 h-0.5 hidden md:block"
-                style={{
-                  background: `linear-gradient(to right, transparent, ${colorThemes.certification.primary}, transparent)`,
-                }}
-              />
-
-              {/* Scrollable Timeline - Carousel for 7 items */}
-              <div
-                ref={scrollContainerRef}
-                className="overflow-x-auto pb-4 scrollbar-hide border-2 border-red-500 relative"
-                style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-              >
-                <div className="flex gap-6 items-center border-2 border-orange-500">
-                  {journeyByCategory.certification.map((item, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1, duration: 0.5 }}
-                      className="relative w-full md:w-auto flex-shrink-0"
-                    >
-                      {/* Icon Circle - No scale effect */}
-                      <div className="flex justify-center mb-6 relative z-10">
-                        <div
-                          className="w-16 h-16 rounded-xl flex items-center justify-center text-3xl transition-all duration-300"
-                          style={{
-                            backgroundColor: "#020617",
-                            border: `2px solid ${colorThemes.certification.primary}`,
-                            color: colorThemes.certification.primary,
-                            boxShadow: `0 0 0 6px #020617`,
-                          }}
-                        >
-                          <PiCertificateBold className="w-6 h-6" />
-                        </div>
-                      </div>
-
-                      {/* Card - Scale effect on first item (most recent) */}
-                      <div
-                        className={`bg-slate-dark/50 backdrop-blur-sm border rounded-2xl p-6 transition-all duration-300 hover:scale-105 h-48 flex flex-col justify-between ${
-                          index === 0 ? "scale-105" : ""
-                        }`}
-                        style={{
-                          borderColor:
-                            index === 0
-                              ? colorThemes.certification.primary
-                              : `${colorThemes.certification.primary}30`,
-                          boxShadow:
-                            index === 0
-                              ? `0 10px 40px ${colorThemes.certification.primary}40, 0 0 0 1px ${colorThemes.certification.primary}50`
-                              : "none",
-                          minWidth: "280px",
-                          maxWidth: "400px",
-                        }}
-                        onMouseEnter={(e) => {
-                          if (index !== 0) {
-                            e.currentTarget.style.borderColor = `${colorThemes.certification.primary}60`;
-                            e.currentTarget.style.boxShadow = `0 10px 30px ${colorThemes.certification.primary}20`;
-                          }
-                        }}
-                        onMouseLeave={(e) => {
-                          if (index !== 0) {
-                            e.currentTarget.style.borderColor = `${colorThemes.certification.primary}30`;
-                            e.currentTarget.style.boxShadow = "none";
-                          }
-                        }}
-                      >
-                        <div>
-                          <h4 className="text-white font-bold text-lg mb-2 line-clamp-2">
-                            {item.title}
-                          </h4>
-                          <p className="text-gray-300 text-sm line-clamp-2">
-                            {item.place}
-                          </p>
-                        </div>
-                        <div className="flex items-center justify-between mt-4">
-                          <div
-                            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border backdrop-blur-sm text-xs font-medium"
-                            style={{
-                              borderColor: colorThemes.certification.primary,
-                              backgroundColor: `${colorThemes.certification.primary}15`,
-                              color: colorThemes.certification.primary,
-                            }}
-                          >
-                            <FaCalendarAlt className="w-3 h-3" />
-                            <span>{item.status}</span>
-                          </div>
-                          {item.link && (
-                            <a
-                              href={item.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="transition-all duration-300 hover:scale-110"
-                              style={{
-                                color: colorThemes.certification.primary,
-                              }}
-                            >
-                              <FaExternalLinkAlt className="w-4 h-4" />
-                            </a>
-                          )}
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Navigation Arrows - Positioned relative to red container */}
+          {/* Flechas de navegación */}
+          {showArrows && (
+            <>
               <button
-                onClick={() => scroll("left")}
-                className="hidden md:flex absolute -left-16 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-slate-dark/90 border items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg"
-                style={{
-                  borderColor: `${colorThemes.certification.primary}50`,
-                  color: colorThemes.certification.primary,
-                }}
+                onClick={() => slide("left", activeTab)}
+                className="flex absolute left-0 md:-left-4 lg:-left-20 top-11 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-slate-dark/90 border border-strong text-strong items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg shadow-strong/20"
               >
                 <FaChevronLeft className="w-5 h-5" />
               </button>
 
               <button
-                onClick={() => scroll("right")}
-                className="hidden md:flex absolute -right-16 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-slate-dark/90 border items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg"
-                style={{
-                  borderColor: `${colorThemes.certification.primary}50`,
-                  color: colorThemes.certification.primary,
-                }}
+                onClick={() => slide("right", activeTab)}
+                className="flex absolute right-0 md:-right-4 lg:-right-20 top-11 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-slate-dark/90 border border-strong text-strong items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg shadow-strong/20"
               >
                 <FaChevronRight className="w-5 h-5" />
               </button>
+            </>
+          )}
+
+          {/* Carrusel */}
+          {activeCategoryData && (
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              ref={(el) => {
+                if (el) scrollContainerRefs.current[activeTab] = el;
+              }}
+              // NO TOCAR: Configuración crítica para el diseño
+              className="flex gap-10 items-start overflow-hidden pt-5" // gap entre items | pt-5 para que no tape la linea central | overflow-hidden para ocultar scroll | snap-x snap-mandatory para el scroll por snap
+            >
+              {groups.map((group, groupIndex) => (
+                <motion.div
+                  key={groupIndex}
+                  id={`group-${groupIndex}`}
+                  data-observe="true"
+                  data-title={`Grupo ${group.status}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: groupIndex * 0.1, duration: 0.5 }}
+                  className="relative flex-shrink-0 flex flex-col snap-center w-full lg:w-[calc((100%-5rem)/3)]" // Responsive: 1 col móvil/tablet, 3 cols desktop
+                >
+                  {/* Icono en la línea - Estilo Skills */}
+                  <div className="relative z-10 mb-4 -mt-3 flex justify-center">
+                    <div className="w-16 h-16 rounded-xl bg-slate-dark border border-border/20 flex items-center justify-center text-3xl text-white shadow-lg shadow-strong/10 relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-border/20 to-strong/20" />
+                      <div className="relative z-10">
+                        {activeCategoryData.icon}
+                      </div>
+                    </div>
+                    {/* Línea vertical hacia abajo */}
+                    <div className="absolute left-1/2 top-full w-0.5 h-4 -translate-x-1/2 bg-strong" />
+                  </div>
+
+                  {/* Caja de estado - Estilo About Badge */}
+                  <div className="relative z-10 mb-4 flex justify-center">
+                    <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-tag border border-border backdrop-blur-sm">
+                      <FaCalendarAlt className="w-3 h-3 text-strong" />
+                      <span className="text-white text-sm font-medium whitespace-nowrap">
+                        {group.status}
+                      </span>
+                    </div>
+                    {/* Línea vertical hacia abajo */}
+                    <div className="absolute left-1/2 top-full w-0.5 h-4 -translate-x-1/2 bg-strong" />
+                  </div>
+
+                  {/* Tarjetas de contenido apiladas */}
+                  <div className="flex flex-col gap-4 w-full">
+                    {group.items.map((item, itemIndex) => {
+                      const isMostRecent = groupIndex === 0 && itemIndex === 0;
+                      return (
+                        <div key={itemIndex} className="relative group w-full">
+                          {/* Linea conectora entre cards */}
+                          {itemIndex < group.items.length - 1 && (
+                            <div className="absolute left-1/2 top-full h-4 w-0.5 -translate-x-1/2 bg-strong/30" />
+                          )}
+
+                          <div
+                            className={clsx(
+                              "backdrop-blur-sm border rounded-2xl p-4 transition-all duration-300 w-full min-h-[86px] h-auto",
+                              isMostRecent
+                                ? "bg-gradient-to-br from-border/30 to-strong/30 border-border shadow-lg shadow-border/20"
+                                : "bg-slate-dark/50 border-border/30",
+                              item.link
+                                ? "cursor-pointer hover:border-strong hover:shadow-lg hover:shadow-strong/20"
+                                : "cursor-default"
+                            )}
+                            onClick={() => {
+                              if (item.link) {
+                                window.open(item.link, "_blank");
+                              }
+                            }}
+                            onMouseEnter={(e) => {
+                              if (item.link) {
+                                const rect =
+                                  e.currentTarget.getBoundingClientRect();
+                                setTooltip({
+                                  x: rect.left + rect.width / 2,
+                                  y: rect.bottom,
+                                  visible: true,
+                                });
+                              }
+                            }}
+                            onMouseLeave={() => setTooltip(null)}
+                          >
+                            <div className="flex items-center gap-4">
+                              <div className="flex-1">
+                                <h4 className="text-white font-bold text-base mb-2">
+                                  {item.title}
+                                </h4>
+                                <p className="text-gray-400 text-sm">
+                                  {item.place}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
           )}
-        </AnimatePresence>
+        </div>
       </div>
+
+      {/* Tooltip Global */}
+      <AnimatePresence>
+        {tooltip && tooltip.visible && (
+          <motion.div
+            initial={{
+              opacity: 0,
+              scale: 0.9,
+              x: tooltip.x,
+              y: tooltip.y + 12,
+            }}
+            animate={{ opacity: 1, scale: 1, x: tooltip.x, y: tooltip.y + 12 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.2 }}
+            className="fixed top-0 left-0 z-50 px-3 py-2 bg-slate-dark text-tooltip-text text-xs rounded-lg whitespace-nowrap font-semibold shadow-xl border border-strong/30 pointer-events-none"
+          >
+            <div className="relative -translate-x-1/2">
+              Click para ver el certificado
+              <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-dark border-t border-l border-strong/30 rotate-45" />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

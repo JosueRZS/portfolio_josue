@@ -1,3 +1,4 @@
+// TODO: Pendiente mejorar la UI en base a las otras secciones
 "use client";
 
 import Image from "next/image";
@@ -17,7 +18,7 @@ import { VscAzure } from "react-icons/vsc";
 import { TbBrandOffice } from "react-icons/tb";
 
 // Datos de los proyectos
-// TODO: Pendiente agregar proyectos ISTE y Gala
+// TODO: Pendiente agregar proyectos ISTE y Gala cuando estén listos
 const CARD_DATA = [
   {
     title: "PELByte",

@@ -22,7 +22,7 @@ export default function Header() {
 
   const toggleHeader = () => setHeaderOpen((prev) => !prev);
 
-  /* ---- Enlaces normales ---- */
+  /* Enlaces de navegación */
   const renderNavLinks = (mobile = false) => (
     <ul
       className={
@@ -60,7 +60,7 @@ export default function Header() {
 
   return (
     <header className="fixed top-5 z-50 w-full flex justify-center items-start mt-2">
-      {/* ---------- DESKTOP (pill centrado) ---------- */}
+      {/* ESCRITORIO (barra de navegación centrada) */}
       <nav
         className={`hidden md:block transition-all duration-300 px-4 py-3 rounded-full ${
           scrolled
@@ -71,7 +71,7 @@ export default function Header() {
         {renderNavLinks()}
       </nav>
 
-      {/* ---------- BOTÓN MOBILE (queda fuera del pill) ---------- */}
+      {/* BOTÓN MÓVIL (hamburguesa) */}
       <button
         onClick={toggleHeader}
         className={`md:hidden absolute right-4 top-3 transition-all duration-300 ${
@@ -88,7 +88,7 @@ export default function Header() {
         )}
       </button>
 
-      {/* ---------- PANEL MOBILE ---------- */}
+      {/* PANEL MÓVIL (menú desplegable) */}
       {headerOpen && (
         <div
           className="mt-2 w-11/12 mx-auto md:hidden absolute top-16 left-1/2 -translate-x-1/2 rounded-lg bg-gray-900/95 shadow-md px-6 py-4"

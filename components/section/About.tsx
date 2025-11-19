@@ -3,10 +3,11 @@
 import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
 
+// Componente de presentación personal (Sobre mí)
 export default function About() {
   return (
     <section id="about" className="flex items-center justify-center">
-      {/* Sección de la imagen */}
+      {/* Sección de la imagen de perfil */}
       <div className=" hidden md:flex justify-center flex-shrink-0">
         <div className="relative w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden bg-gradient-to-br from-blue-500 via-cyan-400 to-blue-600 p-1 shadow-2xl shadow-cyan-500/20">
           <div className="relative w-full h-full rounded-full overflow-hidden bg-[#1C1F33]">
@@ -20,9 +21,9 @@ export default function About() {
           </div>
         </div>
       </div>
-      {/* Sección de la descripción */}
+      {/* Sección de la descripción y texto animado */}
       <div className="md:ml-12 flex flex-col text-left">
-        {/* Bagde de disponible para trabajar */}
+        {/* Etiqueta de estado "Disponible para trabajar" */}
         <div className="inline-flex items-center mb-4 md:mb-6 gap-2 max-w-[225px] px-4 py-2 rounded-full bg-tag border border-border backdrop-blur-sm">
           <div className="w-2 h-2 rounded-full bg-strong animate-pulse" />
           <span className="text-sm font-medium">Disponible para proyectos</span>
