@@ -1,4 +1,4 @@
-import CoverParticles from "@/components/CoverParticles";
+import CoverParticles from "@/components/layout/CoverParticles";
 import About from "@/components/section/About";
 import Skills from "@/components/section/Skills";
 import Projects from "@/components/section/Projects";

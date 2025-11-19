@@ -4,7 +4,13 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useVisibilityObserver } from "@/hooks/useVisibilityObserver";
 import { useMobile } from "@/hooks/useMobile";
-import { FaBriefcase, FaGraduationCap, FaChevronLeft, FaChevronRight, FaCalendarAlt } from "react-icons/fa";
+import {
+  FaBriefcase,
+  FaGraduationCap,
+  FaChevronLeft,
+  FaChevronRight,
+  FaCalendarAlt,
+} from "react-icons/fa";
 import { PiCertificateBold } from "react-icons/pi";
 import clsx from "clsx";
 
@@ -197,10 +203,10 @@ export default function Journy() {
               key={category.key}
               onClick={() => setActiveTab(category.key)}
               className={clsx(
-                "px-6 py-3 rounded-xl font-medium transition-all duration-300",
+                "px-6 py-3 rounded-xl font-medium transition-all duration-300 border",
                 activeTab === category.key
-                  ? "text-white shadow-lg bg-gradient-to-br from-border/20 to-strong/20 shadow-border/30"
-                  : "bg-slate-dark/50 border border-border/20 text-gray-300 hover:border-border/50 hover:bg-slate-dark/70"
+                  ? "text-white shadow-lg bg-gradient-to-br from-border/20 to-strong/20 shadow-border/30 border-transparent"
+                  : "bg-slate-dark/50 border-border/20 text-gray-300 hover:border-border/50 hover:bg-slate-dark/70"
               )}
             >
               {category.category}

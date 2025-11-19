@@ -8,6 +8,10 @@ const navLinks = [
   { title: "Habilidades", path: "skills" },
   { title: "Trayectoria", path: "journy" },
   { title: "Proyectos", path: "projects" },
+  {
+    title: "Contacto",
+    path: "https://www.linkedin.com/in/josue-ruiz-0952001b3/",
+  },
 ];
 
 export default function Header() {
@@ -35,7 +39,7 @@ export default function Header() {
         <li key={link.path} className={mobile ? "w-full text-center" : ""}>
           <a
             href={`/#${link.path}`}
-            className={`px-3 py-2 hover:text-gray-300 ${
+            className={`px-3 py-4 hover:text-gray-300 ${
               mobile ? "block" : "transition-colors"
             }`}
             onClick={mobile ? toggleHeader : undefined}
@@ -44,17 +48,6 @@ export default function Header() {
           </a>
         </li>
       ))}
-      <li className={mobile ? "w-full text-center" : ""}>
-        <a
-          href="https://www.linkedin.com/in/josue-ruiz-0952001b3/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="px-4 py-2 font-semibold rounded-full inline-block bg-gray-900 text-white shadow-lg ring-2 ring-cyan-300 hover:ring-blue-700 transition"
-          onClick={mobile ? toggleHeader : undefined}
-        >
-          Contacto
-        </a>
-      </li>
     </ul>
   );
 
@@ -64,7 +57,7 @@ export default function Header() {
       <nav
         className={`hidden md:block transition-all duration-300 px-4 py-3 rounded-full ${
           scrolled
-            ? "bg-gray-900/80 shadow-lg ring-1 backdrop-blur-md ring-white/10"
+            ? "bg-slate-dark/70 backdrop-blur-lg border border-border/30 shadow-lg ring-1 ring-transparent focus:ring-border"
             : "bg-transparent"
         }`}
       >
