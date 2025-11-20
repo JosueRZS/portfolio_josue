@@ -1,5 +1,6 @@
 "use client";
 
+import clsx from "clsx";
 import { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 
@@ -19,49 +20,41 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => setScrolled(window.scrollY > 5);
     window.addEventListener("scroll", onScroll);
+    // Verificar el estado inicial del scroll
+    onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const toggleHeader = () => setHeaderOpen((prev) => !prev);
 
-  /* Enlaces de navegación */
-  const renderNavLinks = (mobile = false) => (
-    <ul
-      className={
-        mobile
-          ? "flex flex-col items-center space-y-4 text-white"
-          : "flex items-center space-x-4 text-white"
-      }
-    >
-      {navLinks.map((link) => (
-        <li key={link.path} className={mobile ? "w-full text-center" : ""}>
-          <a
-            href={`/#${link.path}`}
-            className={`px-3 py-4 hover:text-gray-300 ${
-              mobile ? "block" : "transition-colors"
-            }`}
-            onClick={mobile ? toggleHeader : undefined}
-          >
-            {link.title}
-          </a>
-        </li>
-      ))}
-    </ul>
-  );
-
   return (
     <header className="fixed top-5 z-50 w-full flex justify-center items-start mt-2">
       {/* ESCRITORIO (barra de navegación centrada) */}
       <nav
-        className={`hidden md:block transition-all duration-300 px-4 py-3 rounded-full ${
+        className={`hidden md:block transition-all duration-200 ease-in-out p-4 rounded-full ${
           scrolled
-            ? "bg-slate-dark/70 backdrop-blur-lg border border-border/30 shadow-lg ring-1 ring-transparent focus:ring-border"
-            : "bg-transparent"
-        }`}
+            ? "bg-slate-dark/70 backdrop-blur-lg border-border/10 shadow-lg shadow-border/30"
+            : "bg-transparent border-transparent"
+        } border`}
       >
-        {renderNavLinks()}
+        <ul className="flex items-center space-x-12 px-4 text-white">
+          {navLinks.map((link) => (
+            <li key={link.path}>
+              <a
+                href={`/#${link.path}`}
+                className={clsx(
+                  "hover:text-gray-300 focus:outline-none border-b-transparent",
+                  "focus:border-b-2 focus:border-border",
+                  "transition-colors"
+                )}
+              >
+                {link.title}
+              </a>
+            </li>
+          ))}
+        </ul>
       </nav>
 
       {/* BOTÓN MÓVIL (hamburguesa) */}
@@ -87,7 +80,23 @@ export default function Header() {
           className="mt-2 w-11/12 mx-auto md:hidden absolute top-16 left-1/2 -translate-x-1/2 rounded-lg bg-gray-900/95 shadow-md px-6 py-4"
           aria-label="Menú de navegación móvil"
         >
-          {renderNavLinks(true)}
+          <ul className="flex flex-col items-center space-y-4 text-white">
+            {navLinks.map((link) => (
+              <li key={link.path} className="w-full text-center">
+                <a
+                  href={`/#${link.path}`}
+                  className={clsx(
+                    "px-3 py-4 hover:text-gray-300 focus:outline-none border-b-transparent",
+                    "focus:border-b-2 focus:border-border",
+                    "block"
+                  )}
+                  onClick={toggleHeader}
+                >
+                  {link.title}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </header>

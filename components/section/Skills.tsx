@@ -18,6 +18,7 @@ const skillsByCategory = [
       { name: "CSS 3", image: "/icons/css3.svg" },
       { name: "JavaScript", image: "/icons/javascript.svg" },
       { name: "React", image: "/icons/react.svg" },
+      { name: "Tailwind CSS", image: "/icons/tailwindcss.svg" },
       { name: "Next.js", image: "/icons/nextjs.svg" },
     ],
   },
