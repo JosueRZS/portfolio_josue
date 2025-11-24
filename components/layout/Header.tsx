@@ -52,9 +52,7 @@ export default function Header() {
           ))}
           <li>
             <a
-              href="https://linkedin.com/in/josueruiz"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="mailto:contact@josuerzs.dev"
               className={clsx(
                 "hover:text-gray-300 focus:outline-none border-b-transparent",
                 "focus:border-b-2 focus:border-border",
@@ -108,9 +106,7 @@ export default function Header() {
             ))}
             <li className="w-full text-center">
               <a
-                href="https://linkedin.com/in/josueruiz"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="mailto:contact@josuerzs.dev"
                 className={clsx(
                   "px-3 py-4 hover:text-gray-300 focus:outline-none border-b-transparent",
                   "focus:border-b-2 focus:border-border",
