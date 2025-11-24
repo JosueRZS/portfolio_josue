@@ -13,32 +13,32 @@ const projects = [
   },
   {
     title: "Marcfashion",
-    media: "/images/screenshots/cropped/Marcfashion_1920_cropped.png",
+    media: "/images/screenshots/Marcfashion_1920.png",
     description:
       "Plataforma de comercio electrónico internacional.",
   },
   {
     title: "Gala Export",
-    media: "/images/screenshots/cropped/Gala_Export_1920_cropped.png",
+    media: "/images/screenshots/Gala_Export_1920.png",
     description:
       "Aplicación web con blog y landing page, orientada a mercados internacionales.",
   },
   {
     title: "PSI",
-    media: "/images/screenshots/cropped/PSI_Censurado_1920_cropped.png",
+    media: "/images/screenshots/PSI_Censurado_1920.png",
     description:
       "Dashboard administrativo con integración avanzada de servicios en la nube y gestión documental.",
   },
   {
     title: "App Móvil",
     media:
-      "/images/screenshots/cropped/App_Movil_Censurado_blanco_1920_cropped.png",
+      "/images/screenshots/App_Movil_Censurado_blanco_1920.png",
     description:
       "Aplicación móvil con autenticación, gestión de roles y conexión a servicios en la nube.",
   },
   {
     title: "PELByte",
-    media: "/images/screenshots/cropped/PELByte_1920_cropped.png",
+    media: "/images/screenshots/PELByte_1920.png",
     description:
       "Landing page corporativa para servicios tecnológicos, enfocada en la presentación profesional.",
   },
