@@ -9,10 +9,6 @@ const navLinks = [
   { title: "Habilidades", path: "skills" },
   { title: "Trayectoria", path: "journy" },
   { title: "Proyectos", path: "projects" },
-  {
-    title: "Contacto",
-    path: "https://www.linkedin.com/in/josue-ruiz-0952001b3/",
-  },
 ];
 
 export default function Header() {
@@ -54,6 +50,20 @@ export default function Header() {
               </a>
             </li>
           ))}
+          <li>
+            <a
+              href="https://linkedin.com/in/josueruiz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={clsx(
+                "hover:text-gray-300 focus:outline-none border-b-transparent",
+                "focus:border-b-2 focus:border-border",
+                "transition-colors"
+              )}
+            >
+              Contacto
+            </a>
+          </li>
         </ul>
       </nav>
 
@@ -96,6 +106,21 @@ export default function Header() {
                 </a>
               </li>
             ))}
+            <li className="w-full text-center">
+              <a
+                href="https://linkedin.com/in/josueruiz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={clsx(
+                  "px-3 py-4 hover:text-gray-300 focus:outline-none border-b-transparent",
+                  "focus:border-b-2 focus:border-border",
+                  "block"
+                )}
+                onClick={toggleHeader}
+              >
+                Contacto
+              </a>
+            </li>
           </ul>
         </div>
       )}

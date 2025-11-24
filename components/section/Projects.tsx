@@ -1,107 +1,114 @@
-// TODO: Pendiente mejorar la UI en base a las otras secciones
 "use client";
 
 import { motion } from "framer-motion";
-import clsx from "clsx";
+import { FaCog } from "react-icons/fa";
 import Image from "next/image";
 
 // Datos de los proyectos
-// TODO: Pendiente agregar proyectos ISTE y Gala cuando estén listos
 const projects = [
   {
     title: "Proximamente",
     media: "/images/placeholder.svg",
-    description: "",
-    tecnologies: [{}],
+    description: "Más ideas están siendo transformadas en proyectos reales.",
   },
   {
     title: "Marcfashion",
-    media: "/images/screenshots/Marcfashion_1920.png",
-    description: "Aplicación Ecommerce Internacionalizada.",
-    tecnologies: [
-      { title: "Next.js", icon: "/icons/nextjs.svg" },
-      { title: "Tailwind CSS", icon: "/icons/tailwindcss.svg" },
-      { title: "Supabase", icon: "/icons/supabase.svg" },
-      { title: "Vercel", icon: "/icons/vercel.svg" },
-      { title: "Google Cloud", icon: "/icons/google-cloud.svg" },
-    ],
+    media: "/images/screenshots/cropped/Marcfashion_1920_cropped.png",
+    description:
+      "Plataforma de comercio electrónico internacional.",
   },
   {
     title: "Gala Export",
-    media: "/images/screenshots/Gala_Export_1920.png",
-    description: "Aplicación Web con Landing de Blogs Internacionalizada.",
-    tecnologies: [
-      { title: "Next.js", icon: "/icons/nextjs.svg" },
-      { title: "Tailwind CSS", icon: "/icons/tailwindcss.svg" },
-      { title: "Supabase", icon: "/icons/supabase.svg" },
-      { title: "Vercel", icon: "/icons/vercel.svg" },
-    ],
-  },
-  {
-    title: "PELByte",
-    media: "/images/screenshots/PELByte_1920.png",
+    media: "/images/screenshots/cropped/Gala_Export_1920_cropped.png",
     description:
-      "Single Landing Page para empresa relacionada con servicios tecnológicos.",
-    tecnologies: [
-      { title: "WordPress", icon: "/icons/wordpress.svg" },
-      { title: "Elementor", icon: "/icons/elementor.svg" },
-    ],
+      "Aplicación web con blog y landing page, orientada a mercados internacionales.",
   },
   {
     title: "PSI",
-    media: "/images/screenshots/PSI_Censurado_1920.png",
+    media: "/images/screenshots/cropped/PSI_Censurado_1920_cropped.png",
     description:
-      "Dashboard administrativo con consumo de APIs, autenticación, roles, conexión con servicios en la nube de Azure y almacenamiento en gestor documental Sharepoint.",
-    tecnologies: [
-      { title: "Next.js", icon: "/icons/nextjs.svg" },
-      { title: "React", icon: "/icons/react.svg" },
-      { title: "Tailwind CSS", icon: "/icons/tailwindcss.svg" },
-      { title: "Azure", icon: "/icons/azure.svg" },
-    ],
+      "Dashboard administrativo con integración avanzada de servicios en la nube y gestión documental.",
   },
   {
     title: "App Móvil",
-    media: "/images/screenshots/App_Movil_Censurado_1920.png",
+    media:
+      "/images/screenshots/cropped/App_Movil_Censurado_blanco_1920_cropped.png",
     description:
-      "Aplicación móvil con consumo de APIs, autenticación y roles, gestión de estados con RiverPod, conexión con servicios en la nube.",
-    tecnologies: [
-      { title: "Flutter", icon: "/icons/flutter.svg" },
-      { title: "Dart", icon: "/icons/dart.svg" },
-      { title: "Azure", icon: "/icons/azure.svg" },
-    ],
+      "Aplicación móvil con autenticación, gestión de roles y conexión a servicios en la nube.",
+  },
+  {
+    title: "PELByte",
+    media: "/images/screenshots/cropped/PELByte_1920_cropped.png",
+    description:
+      "Landing page corporativa para servicios tecnológicos, enfocada en la presentación profesional.",
   },
 ];
 
 export default function Projects() {
   return (
-    <section className="text-white mt-20">
-      <div id="projects" className="text-center py-10 px-4">
-        {/* Título principal */}
-        <h2 className="text-4xl font-bold mb-12">Proyectos</h2>
+    <section>
+      <div id="projects" className="text-center  lg:pt-10 lg:px-0 px-4">
+        {/* Header */}
+        <h2 className="text-5xl font-bold text-white mb-14 text-center">
+          Mis{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-border to-strong">
+            Proyectos
+          </span>
+        </h2>
 
         {/* Grid de proyectos */}
         <div className="flex flex-wrap lg:flex-row gap-8 justify-center">
-          {projects.map((project, index) => (
-            <motion.div // Card
+          {/* Primer elemento: estilo destacado como el card más reciente de Journy */}
+          <div className="bg-gradient-to-br from-border/20 to-strong/20 border border-border shadow-lg shadow-border/20 rounded-2xl w-full lg:w-[calc((100%-5rem)/3)] min-h-72 flex flex-col items-center justify-center p-8">
+            {/* Icono animado tipo Skills/Journy */}
+            <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-border/20 to-strong/20 flex items-center justify-center text-4xl mb-4 shadow-lg">
+              <motion.span
+                animate={{ rotate: 360 }}
+                transition={{ repeat: Infinity, duration: 6, ease: "linear" }}
+                className="inline-block"
+              >
+                <FaCog className="text-white" />
+              </motion.span>
+            </div>
+            <span className="text-2xl font-bold mb-4">
+              {projects[0].title ?? "Proximamente"}
+            </span>
+            <div className="text-lg text-white/80 mb-2">
+              {(projects[0].description.match(/(?:\S+\s?){1,5}/g) || []).map(
+                (line, idx) => (
+                  <span key={idx} className="block mb-1">
+                    {line.trim()}
+                  </span>
+                )
+              )}
+            </div>
+          </div>
+
+          {/* Resto de proyectos */}
+          {projects.slice(1).map((project, index) => (
+            <motion.div
               key={project.title}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-              className="bg-slate-dark/50 backdrop-blur-sm border border-border/20 rounded-2xl transition-all duration-300 w-full lg:w-[calc((100%-5rem)/3)]"
+              transition={{ duration: 0.5, delay: (index + 1) * 0.2 }}
+              className="relative w-full lg:w-[calc((100%-5rem)/3)] aspect-video rounded-xl overflow-hidden group min-h-72"
             >
-              {/* Header de la tarjeta */}
-              <div className="relative h-50">
-                <Image
-                  src={project.media}
-                  alt={project.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="aspect-[21/10] object-cover object-center"
-                />
+              <Image
+                src={project.media}
+                alt={project.title}
+                fill
+                className="object-cover opacity-20 lg:opacity-100 lg:group-hover:opacity-20 transition-opacity duration-300"
+                sizes="(min-width:1024px) 33vw, 100vw"
+              />
+              <div className="absolute inset-0 flex flex-col items-center justify-center opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300">
+                <h3 className="text-2xl font-bold text-white mb-4">
+                  {project.title}
+                </h3>
+                <p className="text-md text-white text-center px-4">
+                  {project.description}
+                </p>
               </div>
-              {/* Cuerpo de la tarjeta */}
-              <div></div>
             </motion.div>
           ))}
         </div>

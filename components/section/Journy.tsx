@@ -186,7 +186,7 @@ export default function Journy() {
   };
 
   return (
-    <section id="journy" className="py-20 relative">
+    <section id="journy" className="pb-10 relative">
       <div className="relative z-10 px-4">
         {/* Header */}
         <h2 className="text-5xl font-bold text-white mb-14 text-center">
@@ -304,7 +304,7 @@ export default function Journy() {
                             className={clsx(
                               "backdrop-blur-sm border rounded-2xl p-4 transition-all duration-300 w-full min-h-[86px] h-auto",
                               isMostRecent
-                                ? "bg-gradient-to-br from-border/30 to-strong/30 border-border shadow-lg shadow-border/20"
+                                ? "bg-gradient-to-br from-border/20 to-strong/20 border-border shadow-lg shadow-border/20"
                                 : "bg-slate-dark/50 border-border/30",
                               item.link
                                 ? "cursor-pointer hover:border-strong hover:shadow-lg hover:shadow-strong/20"

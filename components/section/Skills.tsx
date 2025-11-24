@@ -72,7 +72,7 @@ const skillsByCategory = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-10">
+    <section id="skills" className="pb-10 pt-6">
       <div>
         {/* Encabezado de la sección */}
         <h2 className="text-5xl font-bold text-white mb-14 text-center">
