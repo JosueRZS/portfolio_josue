@@ -87,7 +87,7 @@ function MobileFooter() {
       <div className="relative mt-12 border-t border-border/40 pt-6">
         {/* Texto superpuesto sobre el borde */}
         <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-          <span className="bg-black-deep text-xs text-white uppercase font-semibold tracking-wider">
+          <span className="bg-black-deep px-4 text-xs text-white uppercase font-semibold tracking-wider whitespace-nowrap">
             Sígueme en redes sociales
           </span>
         </div>
