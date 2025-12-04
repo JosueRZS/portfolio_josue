@@ -51,7 +51,7 @@ export default function Projects() {
         {/* Header */}
         <h2 className="text-5xl font-bold text-white mb-14 text-center">
           Mis{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-border to-strong">
+          <span className="text-transparent bg-clip-text bg-linear-to-r from-border to-strong">
             Proyectos
           </span>
         </h2>
@@ -59,9 +59,9 @@ export default function Projects() {
         {/* Grid de proyectos */}
         <div className="flex flex-wrap lg:flex-row gap-8 justify-center">
           {/* Primer elemento: estilo destacado como el card más reciente de Journy */}
-          <div className="bg-gradient-to-br from-border/20 to-strong/20 border border-border shadow-lg shadow-border/20 rounded-2xl w-full lg:w-[calc((100%-5rem)/3)] min-h-72 flex flex-col items-center justify-center p-8">
+          <div className="bg-linear-to-br from-border/20 to-strong/20 border border-border shadow-lg shadow-border/20 rounded-2xl w-full lg:w-[calc((100%-5rem)/3)] min-h-72 flex flex-col items-center justify-center p-8">
             {/* Icono animado tipo Skills/Journy */}
-            <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-border/20 to-strong/20 flex items-center justify-center text-4xl mb-4 shadow-lg">
+            <div className="w-16 h-16 rounded-xl bg-linear-to-br from-border/20 to-strong/20 flex items-center justify-center text-4xl mb-4 shadow-lg">
               <motion.span
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 6, ease: "linear" }}

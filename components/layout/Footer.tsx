@@ -67,7 +67,7 @@ export default function Footer() {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-border/10 to-strong/10 border border-border/20 cursor-pointer group-hover:from-border/30 group-hover:to-strong/30 group-hover:border-border transition-all duration-300 group-hover:shadow-lg group-hover:shadow-border/20"
+                  className="text-gray-400 hover:text-white w-10 h-10 flex items-center justify-center rounded-xl bg-linear-to-br from-border/10 to-strong/10 border border-border/20 cursor-pointer group-hover:from-border/30 group-hover:to-strong/30 group-hover:border-border transition-all duration-300 group-hover:shadow-lg group-hover:shadow-border/20"
                 >
                   <span className="text-lg">{link.icon}</span>
                 </Link>{" "}
@@ -106,7 +106,7 @@ function MobileFooter() {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-border/10 to-strong/10 border border-border/20 cursor-pointer group-hover:from-border/30 group-hover:to-strong/30 group-hover:border-border transition-all duration-300 group-hover:shadow-lg group-hover:shadow-border/20"
+                  className="text-gray-400 hover:text-white w-10 h-10 flex items-center justify-center rounded-xl bg-linear-to-br from-border/10 to-strong/10 border border-border/20 cursor-pointer group-hover:from-border/30 group-hover:to-strong/30 group-hover:border-border transition-all duration-300 group-hover:shadow-lg group-hover:shadow-border/20"
                 >
                   <span className="text-lg">{link.icon}</span>
                 </Link>{" "}

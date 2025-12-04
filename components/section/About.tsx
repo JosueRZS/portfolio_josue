@@ -8,8 +8,8 @@ export default function About() {
   return (
     <section id="about" className="flex items-center justify-center">
       {/* Sección de la imagen de perfil */}
-      <div className=" hidden md:flex justify-center flex-shrink-0">
-        <div className="relative w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden bg-gradient-to-br from-blue-500 via-cyan-400 to-blue-600 p-1 shadow-2xl shadow-cyan-500/20">
+      <div className=" hidden md:flex justify-center shrink-0">
+        <div className="relative w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden bg-linear-to-br from-blue-500 via-cyan-400 to-blue-600 p-1 shadow-2xl shadow-cyan-500/20">
           <div className="relative w-full h-full rounded-full overflow-hidden bg-[#1C1F33]">
             <Image
               src="/images/avatar_v4.png"
@@ -30,7 +30,7 @@ export default function About() {
         </div>
         <h1 className="text-4xl md:text-6xl font-bold">
           <span className="text-white">Hola, soy</span>
-          <span className="block md:inline text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-cyan-200 to-cyan-400 mt-2 md:mt-0 md:ml-2">
+          <span className="block md:inline text-transparent bg-clip-text bg-linear-to-r from-blue-700 via-cyan-200 to-cyan-400 mt-2 md:mt-0 md:ml-2">
             <TypeAnimation
               sequence={["Josue Ruiz", 4000]}
               wrapper="span"

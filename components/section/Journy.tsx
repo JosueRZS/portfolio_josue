@@ -191,7 +191,7 @@ export default function Journy() {
         {/* Header */}
         <h2 className="text-5xl font-bold text-white mb-14 text-center">
           Mi{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-border to-strong">
+          <span className="text-transparent bg-clip-text bg-linear-to-r from-border to-strong">
             Trayectoria
           </span>
         </h2>
@@ -205,7 +205,7 @@ export default function Journy() {
               className={clsx(
                 "px-6 py-3 rounded-xl font-medium transition-all duration-300 border",
                 activeTab === category.key
-                  ? "text-white shadow-lg bg-gradient-to-br from-border/20 to-strong/20 shadow-border/30 border-transparent"
+                  ? "text-white shadow-lg bg-linear-to-br from-border/20 to-strong/20 shadow-border/30 border-transparent"
                   : "bg-slate-dark/50 border-border/20 text-gray-300 hover:border-border/50 hover:bg-slate-dark/70"
               )}
             >
@@ -219,7 +219,7 @@ export default function Journy() {
           {/* Linea central decorativa */}
           <div
             // NO TOCAR: Configuración crítica para el diseño
-            className="absolute left-0 right-0 h-0.5 hidden lg:block bg-gradient-to-r from-transparent via-strong to-transparent top-11" // top-11 para que quede alineada con los iconos
+            className="absolute left-0 right-0 h-0.5 hidden lg:block bg-linear-to-r from-transparent via-strong to-transparent top-11" // top-11 para que quede alineada con los iconos
           />
 
           {/* Flechas de navegación */}
@@ -263,12 +263,12 @@ export default function Journy() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: groupIndex * 0.1, duration: 0.5 }}
-                  className="relative flex-shrink-0 flex flex-col snap-center w-full lg:w-[calc((100%-5rem)/3)]" // Responsive: 1 col móvil/tablet, 3 cols desktop
+                  className="relative shrink-0 flex flex-col snap-center w-full lg:w-[calc((100%-5rem)/3)]" // Responsive: 1 col móvil/tablet, 3 cols desktop
                 >
                   {/* Icono en la línea - Estilo Skills */}
                   <div className="relative z-10 mb-4 -mt-3 flex justify-center">
                     <div className="w-16 h-16 rounded-xl bg-slate-dark border border-border/20 flex items-center justify-center text-3xl text-white shadow-lg shadow-strong/10 relative overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-br from-border/20 to-strong/20" />
+                      <div className="absolute inset-0 bg-linear-to-br from-border/20 to-strong/20" />
                       <div className="relative z-10">
                         {activeCategoryData.icon}
                       </div>
@@ -304,7 +304,7 @@ export default function Journy() {
                             className={clsx(
                               "backdrop-blur-sm border rounded-2xl p-4 transition-all duration-300 w-full min-h-[86px] h-auto",
                               isMostRecent
-                                ? "bg-gradient-to-br from-border/20 to-strong/20 border-border shadow-lg shadow-border/20"
+                                ? "bg-linear-to-br from-border/20 to-strong/20 border-border shadow-lg shadow-border/20"
                                 : "bg-slate-dark/50 border-border/30",
                               item.link
                                 ? "cursor-pointer hover:border-strong hover:shadow-lg hover:shadow-strong/20"

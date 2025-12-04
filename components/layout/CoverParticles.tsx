@@ -69,7 +69,7 @@ export default function CoverParticles() {
                 density: {
                   enable: true,
                 },
-                value: 80,
+                value: 100,
               },
               opacity: {
                 value: 0.5,

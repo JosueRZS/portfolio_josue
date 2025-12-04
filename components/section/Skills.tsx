@@ -77,7 +77,7 @@ export default function Skills() {
         {/* Encabezado de la sección */}
         <h2 className="text-5xl font-bold text-white mb-14 text-center">
           Mis{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-border to-strong">
+          <span className="text-transparent bg-clip-text bg-linear-to-r from-border to-strong">
             Habilidades
           </span>
         </h2>
@@ -101,7 +101,7 @@ export default function Skills() {
                 <div className="space-y-8">
                   {/* Encabezado de categoría */}
                   <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-border/20 to-strong/20 flex items-center justify-center text-4xl">
+                    <div className="w-16 h-16 rounded-xl bg-linear-to-br from-border/20 to-strong/20 flex items-center justify-center text-4xl">
                       {category.icon}
                     </div>
                     <div>
@@ -122,7 +122,7 @@ export default function Skills() {
                         whileHover={{ scale: 1.1, y: -4 }}
                         className="group relative"
                       >
-                        <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-border/10 to-strong/10 border border-border/20 flex items-center justify-center cursor-pointer group-hover:from-border/30 group-hover:to-strong/30 group-hover:border-border transition-all duration-300 group-hover:shadow-lg group-hover:shadow-border/20">
+                        <div className="w-14 h-14 rounded-xl bg-linear-to-br from-border/10 to-strong/10 border border-border/20 flex items-center justify-center cursor-pointer group-hover:from-border/30 group-hover:to-strong/30 group-hover:border-border transition-all duration-300 group-hover:shadow-lg group-hover:shadow-border/20">
                           <Image
                             src={skill.image}
                             alt={skill.name}
