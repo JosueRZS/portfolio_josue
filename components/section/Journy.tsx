@@ -363,7 +363,7 @@ export default function Journy() {
             animate={{ opacity: 1, scale: 1, x: tooltip.x, y: tooltip.y + 12 }}
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-0 -left-24 z-50 px-3 py-2 bg-slate-dark text-tooltip-text text-xs rounded-lg whitespace-nowrap font-semibold shadow-xl border border-strong/30 pointer-events-none"
+            className="fixed top-0 -left-24 z-50 px-3 py-2 bg-slate-dark text-text text-xs rounded-lg whitespace-nowrap font-semibold shadow-xl border border-strong/30 pointer-events-none"
           >
             <div className="relative">
               Click para ver el certificado

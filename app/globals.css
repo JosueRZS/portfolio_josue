@@ -1,6 +1,21 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+    --color-black-deep: #020617;
+    --color-slate-dark: #0f172a;
+    --color-border: #06b6d4;
+    --color-strong: #0ea5e9;
+    --color-tag: #22d3ee1a;
+    --color-text: #FFFFFF;
+}
+
+.gradient-main {
+    @apply bg-linear-to-r from-cyan-500/20 via-blue-500/20 to-transparent;
+}
+
+.gradient-text {
+    @apply bg-linear-to-r from-cyan-400/20 via-blue-400/20 to-transparent;
+}
 
 @font-face {
     font-family: 'Onest';
@@ -10,7 +25,8 @@
 }
 
 html {
-    font-family: 'Onest', sans-serif; }
+    font-family: 'Onest', sans-serif;
+}
 
 /* Estilos para scroll personalizado */
 ::-webkit-scrollbar {

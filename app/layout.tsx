@@ -34,7 +34,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/icons/favicon.svg" type="image/svg+xml" />
       </head>
-      <body className="min-h-screen bg-black-deep text-white antialiased">
+      <body className="min-h-screen bg-black-deep text-text antialiased">
         <div className="flex min-h-screen flex-col">
           {/* Encabezado global */}
           <Header />

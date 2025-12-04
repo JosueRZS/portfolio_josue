@@ -133,7 +133,7 @@ export default function Skills() {
                         </div>
 
                         {/* Tooltip */}
-                        <div className="absolute -top-12 left-1/2 -translate-x-1/2 px-3 py-2 bg-slate-dark text-tooltip-text text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap font-semibold pointer-events-none shadow-xl z-10">
+                        <div className="absolute -top-12 left-1/2 -translate-x-1/2 px-3 py-2 bg-slate-dark text-text text-xs rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap font-semibold pointer-events-none shadow-xl z-10">
                           {skill.name}
                           <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-border/50 rotate-45" />
                         </div>
